@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -20,6 +21,12 @@ const groceries: Grocery[] = [
 const App: React.FC = () => {
   const [sortedBy, setSortedBy] = useState<string>();
   const [groceryList, setGroceryList] = useState<Grocery[]>(groceries);
+  const [newGrocery, setNewGrocery] = useState<Grocery>({
+    id: 0,
+    name: '',
+    price: 0,
+    imageSrc: '',
+  });
 
   const handleSort = (sortBy: string) => {
     let sortedList: Grocery[] = [];
@@ -40,6 +47,22 @@ const App: React.FC = () => {
     setGroceryList(sortedList);
     setSortedBy(sortBy);
   };
+
+  const handleChange=(event: React.ChangeEvent<HTMLInputElement>)=>{  
+    const newInput = (data: Grocery)=>({...data, [event.target.name]:event.target.value})
+    setNewGrocery(newInput)
+  }
+  const addGrocery= (event: React.MouseEvent<HTMLInputElement>) =>{
+    event.preventDefault();
+    const checkEmptyInput = !Object.values(newGrocery).every(res=>res==="")
+    if(checkEmptyInput)
+    {
+     const newData = (data: Grocery[])=>([...data, newGrocery])
+     setGroceryList(newData);
+     const emptyInput= {id: 0, name: '', price: 0, imageSrc: ''}
+     setNewGrocery(emptyInput)
+    }
+  }  
 
   const handleDeleteGrocery = (id: number) => {
     const updatedList = groceryList.filter((grocery) => grocery.id !== id);
@@ -65,6 +88,54 @@ const App: React.FC = () => {
           <option value="priceAsc">Price (Lower to Higher)</option>
           <option value="priceDesc">Price (Higher to Lower)</option>
         </select>
+      </div>
+      <div className='text-center row mb-4'>
+        <form className="form-group">
+          <div className="row row-cols-1">
+            <div className="col-md-4">
+              <div className="row">
+                <label>Name:</label>
+              </div>
+              <input className='mx-2 input-box'
+                type="text"
+                name="name"
+                id='name'
+                value={newGrocery.name}
+                onChange={handleChange}
+                placeholder='Enter Grocery Name'
+              />
+            </div>
+            <div className="col-md-4">
+              <div className="row row-cols-2">
+                <label>Price:</label>
+              </div>
+              <input className='mx-2 input-box'
+                type="number"
+                name="price"
+                value={newGrocery.price}
+                onChange={handleChange}
+                placeholder='Enter Price'
+              />
+            </div>
+            <div className="col-md-4">
+              <div className="row row-cols-2">
+                <label>Image Path:</label>
+              </div>
+              <input className='mx-2 input-box'
+                type="text"
+                name="imageSrc"
+                value={newGrocery.imageSrc}
+                onChange={handleChange}
+                placeholder='Enter image path'
+              />
+            </div>
+          </div>
+          <div className="row text-center">
+            <div className="row-cols-4">
+              <input className='btn btn-success mt-4' type="submit" onClick={addGrocery}/>
+            </div>
+          </div>
+        </form>
       </div>
       <div className="row">
         {groceryList.map((grocery) => (
