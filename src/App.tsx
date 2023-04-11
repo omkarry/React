@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -42,6 +41,11 @@ const App: React.FC = () => {
     setSortedBy(sortBy);
   };
 
+  const handleDeleteGrocery = (id: number) => {
+    const updatedList = groceryList.filter((grocery) => grocery.id !== id);
+    setGroceryList(updatedList);
+  };
+
   return (
     <React.Fragment>
     <div className="container mt-5">
@@ -75,6 +79,12 @@ const App: React.FC = () => {
               <div className="card-body">
                 <h5 className="card-title">{grocery.name}</h5>
                 <p className="card-text">${Number(grocery.price).toFixed(2)}</p>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => handleDeleteGrocery(grocery.id)}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>
