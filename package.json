@@ -12,6 +12,8 @@
     "@types/react-dom": "^18.0.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-form-stepper": "^2.0.3",
+    "react-modal": "^3.16.1",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
@@ -39,5 +41,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-modal": "^3.13.1",
+    "bootstrap": "^5.2.3",
+    "bs-stepper": "^1.7.0",
+    "gh-pages": "^5.0.0",
+    "react-bootstrap": "^2.7.3"
   }
 }
