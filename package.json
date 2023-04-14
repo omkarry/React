@@ -39,5 +39,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "bootstrap": "^5.2.3",
+    "gh-pages": "^5.0.0",
+    "react-bootstrap": "^2.7.3",
+    "react-form-stepper": "^2.0.3",
+    "react-icons": "^4.8.0",
+    "react-router-dom": "^6.10.0"
   }
 }
